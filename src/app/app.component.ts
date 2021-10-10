@@ -1,7 +1,9 @@
 import { Component , OnInit } from '@angular/core';
 import { Hero } from './models/hero';
-import { EntityCollectionService, EntityServices } from '@ngrx/data';
+import { ChangeSet, ChangeSetItem, ChangeSetOperation, EntityCacheDispatcher, EntityCollectionService, EntityServices } from '@ngrx/data';
 import { Observable } from 'rxjs';
+import { Villain } from './models/villain';
+import { changeSetItemFactory as cif } from '@ngrx/data';
 
 @Component({
   selector: 'app-root',
@@ -14,45 +16,70 @@ export class AppComponent implements OnInit  {
   loading$: Observable<boolean>;
   heroes$: Observable<Hero[]>;
 
-  constructor(entityServices: EntityServices) {
+  villainsService: EntityCollectionService<Villain>;
+  loadingvillain$: Observable<boolean>;
+  villains$: Observable<Villain[]>;
+
+  constructor(entityServices: EntityServices,
+    private cacheEntityDispatcher: EntityCacheDispatcher,
+    ) {
     this.heroesService = entityServices.getEntityCollectionService('Hero');
     this.heroes$ = this.heroesService.entities$;
     this.loading$ =  this.heroesService.loading$;
+
+    this.villainsService = entityServices.getEntityCollectionService('Villain');
+    this.villains$ = this.villainsService.entities$;
+    this.loadingvillain$ = this.villainsService.loading$;
+
     this.getChanges()
+    this.getVillainChanges()
   }
  
   ngOnInit() {
     this.getHeroes();
+    this.getVillains()
   }
-  add(): void {
-    this.heroesService.add({id: 4, name: 'gggg',saying: 'fgfgf',dateLoaded: '2012-05-05'});    
+
+  transaction(): void{
+    const changes: ChangeSetItem[] = [
+      cif.add('Hero', {
+           id: 4,
+           name: 'new heroe add 77',
+           saying: 'Hello heroe',
+           dateLoaded: '2012-06-06'
+          }),
+      cif.delete('Villain', [2,3])
+    ];
+
+    const changeSet: ChangeSet = { changes, tag: 'Delete mutiple data entity'}
+    this.cacheEntityDispatcher.saveEntities(
+      changeSet,
+      'api/villains', // whatever your server expects (endpoint process information in backend)
+      { isOptimistic: true }
+    )
   }
- 
-  delete(): void {
-   this.heroesService.delete(1)
-  }
+
  
   getHeroes(): void {
    this.heroesService.getAll()
   }
+
+  getVillains(): void {
+    this.villainsService.getAll()
+   }
  
-  update(): void {
-    this.heroesService.update({id: 2, name: 'Manuela',saying: 'Hellos',dateLoaded: '1111-11-11'});
-  }
-
-  getForName(){
-    /*this.heroesService.getWithQuery('name=Heroe 3&id=1').subscribe((data)=>{
-          console.log(data)
-    })*/
-  }
-
-  getById = () =>{
-     // this.heroesService.getByKey(1)
-  }
 
   getChanges = () =>{
     this.heroes$.subscribe((data)=>{
       console.log(data)
     })
   }
+
+  getVillainChanges = () =>{
+    this.villains$.subscribe((data)=>{
+      console.log(data)
+    })
+  }
+
+
 }

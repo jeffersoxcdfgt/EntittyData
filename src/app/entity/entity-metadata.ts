@@ -7,15 +7,26 @@ const entityMetadata: EntityMetadataMap = {
     entityDispatcherOptions: { 
       optimisticAdd: true, 
       optimisticUpdate: true ,
-      optimisticDelete: false
+      optimisticDelete: true
     }
 
   },
-  Villain: {}
+  Villain: {
+     /* optional settings */
+     entityDispatcherOptions: { 
+      optimisticAdd: true, 
+      optimisticUpdate: true ,
+      optimisticDelete: true
+    }
+
+  }
 };
 
 // because the plural of "hero" is not "heros"
-const pluralNames = { Hero: 'Heroes' };
+const pluralNames = { 
+  Hero: 'Heroes' ,
+  Villain: 'Villains'
+};
 
 export const entityConfig = {
   entityMetadata,

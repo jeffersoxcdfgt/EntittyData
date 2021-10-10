@@ -23,6 +23,20 @@ export class AppInMemoryApi  implements InMemoryDbService{
               dateLoaded: '2021-05-30'
             }*/
             
+           ],
+           villains:[
+             {
+               id:1,
+               name:'Villain 1'
+             },
+             {
+              id:2,
+              name:'Villain 2'
+             },
+             {
+              id:3,
+              name:'Villain 3'
+             }
            ]
         }
     }
