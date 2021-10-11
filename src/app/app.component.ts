@@ -1,7 +1,9 @@
 import { Component , OnInit } from '@angular/core';
 import { Hero } from './models/hero';
-import { EntityCollectionService, EntityServices } from '@ngrx/data';
+import { EntityActionFactory, EntityActionPayload, EntityCache, EntityCollection, EntityCollectionService, EntityOp, EntityServices } from '@ngrx/data';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Update} from '@ngrx/entity';
 
 @Component({
   selector: 'app-root',
@@ -13,41 +15,76 @@ export class AppComponent implements OnInit  {
   heroesService: EntityCollectionService<Hero>;
   loading$: Observable<boolean>;
   heroes$: Observable<Hero[]>;
+  store:any;
 
-  constructor(entityServices: EntityServices) {
+  constructor(entityServices: EntityServices,
+          store:Store<EntityCollection>
+    ) {
     this.heroesService = entityServices.getEntityCollectionService('Hero');
     this.heroes$ = this.heroesService.entities$;
     this.loading$ =  this.heroesService.loading$;
+    this.store = store  
     this.getChanges()
   }
  
-  ngOnInit() {
-    this.getHeroes();
-  }
-  add(): void {
-    this.heroesService.add({id: 4, name: 'gggg',saying: 'fgfgf',dateLoaded: '2012-05-05'});    
-  }
- 
-  delete(): void {
-   this.heroesService.delete(1)
-  }
- 
-  getHeroes(): void {
-   this.heroesService.getAll()
-  }
- 
-  update(): void {
-    this.heroesService.update({id: 2, name: 'Manuela',saying: 'Hellos',dateLoaded: '1111-11-11'});
+  ngOnInit() {   
+    this.getHeroes()
+
   }
 
-  getForName(){
-    /*this.heroesService.getWithQuery('name=Heroe 3&id=1').subscribe((data)=>{
-          console.log(data)
-    })*/
+  add(): void{
+   const hero: Hero ={id: 4, name: 'gggg',saying: 'fgfgf',dateLoaded: '2012-05-05'};
+   const payload: EntityActionPayload = {
+     entityName: 'Hero',
+     entityOp: EntityOp.ADD_ONE,
+     data: hero,
+     //mergeStrategy: MergeStrategy.IgnoreChanges,
+     // .. other options ..
+   };
+   const Addaction = new EntityActionFactory().create(payload)
+   this.store.dispatch(Addaction);
   }
+
+  update(): void {
+    const hero: Hero = {id: 2, name: 'Manuela',saying: 'Hellos',dateLoaded: '1111-11-11'}
+    const Updateaction = new EntityActionFactory().create<Update<Hero>>(      
+      'Hero',
+      EntityOp.UPDATE_ONE,
+       { 
+          id:2,
+          changes: hero
+      }
+     );
+      this.store.dispatch(Updateaction);
+  }
+
+  delete(): void {
+    const Deleteaction = new EntityActionFactory().create<number>(      
+      'Hero',
+      EntityOp.REMOVE_ONE,
+      2,
+    );
+    this.store.dispatch(Deleteaction);
+  }
+
+  getHeroes (): void{
+    const Queryaction = new EntityActionFactory().create<Hero>(
+      'Hero',
+      EntityOp.QUERY_ALL,
+    );
+    this.store.dispatch(Queryaction);
+  }
+
+
 
   getById = () =>{
-     // this.heroesService.getByKey(1)
+    /*const hero = { id: 1 } as Hero;
+    const QueryByIdaction = new EntityActionFactory().create<Hero>(      
+      'Hero',
+      EntityOp.QUERY_BY_KEY_SUCCESS,
+      hero,
+    );
+    this.store.dispatch(QueryByIdaction);   */ 
   }
 
   getChanges = () =>{

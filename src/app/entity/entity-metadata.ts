@@ -5,8 +5,8 @@ const entityMetadata: EntityMetadataMap = {
  
      /* optional settings */
     entityDispatcherOptions: { 
-      optimisticAdd: true, 
-      optimisticUpdate: true ,
+      optimisticAdd: false, 
+      optimisticUpdate: false ,
       optimisticDelete: false
     }
 
