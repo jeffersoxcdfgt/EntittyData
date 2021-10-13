@@ -41,22 +41,23 @@ export class AppComponent implements OnInit  {
   }
 
   transaction(): void{
+    const hero = {id: 4, name: 'Hero for store', saying: 'Hello heroe for store', dateLoaded: '2012-07-07'}
     const changes: ChangeSetItem[] = [
-      cif.add('Hero', {
-           id: 4,
-           name: 'new heroe add 77',
-           saying: 'Hello heroe',
-           dateLoaded: '2012-06-06'
-          }),
-      cif.delete('Villain', [2,3])
+      {
+        op: ChangeSetOperation.Add,
+        entityName: 'Hero',
+        entities: [hero]
+      },
+      {
+        op: ChangeSetOperation.Delete,
+        entityName: 'Villain',
+        entities: [2, 3] // delete by their ids
+      }
     ];
 
-    const changeSet: ChangeSet = { changes, tag: 'Delete mutiple data entity'}
-    this.cacheEntityDispatcher.saveEntities(
-      changeSet,
-      'api/villains', // whatever your server expects (endpoint process information in backend)
-      { isOptimistic: true }
-    )
+    const changeSet: ChangeSet = { changes, tag: 'Operation Multiple'}
+    const saveUrl =   'api/villains'
+    this.cacheEntityDispatcher.saveEntities(changeSet, saveUrl)
   }
 
  
