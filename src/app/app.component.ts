@@ -444,6 +444,17 @@ export class AppComponent implements OnInit  {
     this.store.dispatch(Deleteaction);
   }
 
+  setFilter(): void {
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SET_FILTER,
+      data:1,
+    };
+    const setfilter = new EntityActionFactory().create(payload)
+    this.store.dispatch(setfilter);
+
+  }
+
   getHeroes (): void{
     const Queryaction = new EntityActionFactory().create<Hero>(
       'Hero',
