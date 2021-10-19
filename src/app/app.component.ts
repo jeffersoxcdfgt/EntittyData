@@ -36,7 +36,7 @@ export class AppComponent implements OnInit  {
 
   }
 
-  add(): void{
+  addone(): void{
    const hero: Hero ={id: 4, name: 'gggg',saying: 'fgfgf',dateLoaded: '2012-05-05'};
    const payload: EntityActionPayload = {
      entityName: 'Hero',
@@ -47,6 +47,107 @@ export class AppComponent implements OnInit  {
    };
    const Addaction = new EntityActionFactory().create(payload)
    this.store.dispatch(Addaction);
+  }
+
+  addmany(): void {
+    const adddata: Hero[] = [
+                          { id: 3, name: 'rftyyh',saying: 'yuuy',dateLoaded: '8545-88-99'},
+                          { id:4, name: 'ghgh',saying: 'tggg',dateLoaded: '788-88-19'}
+                          ]
+    const payload: EntityActionPayload = {
+    entityName: 'Hero',
+    entityOp: EntityOp.ADD_MANY,
+    data: adddata,
+    };
+    const addall = new EntityActionFactory().create(payload)
+    this.store.dispatch(addall);
+
+  }
+
+
+  addall(): void {
+    const adddata: Hero[] = [
+                          { id: 3, name: 'rftyyh',saying: 'yuuy',dateLoaded: '8545-88-99'},
+                          { id:4, name: 'ghgh',saying: 'tggg',dateLoaded: '788-88-19'}
+                          ]
+    const payload: EntityActionPayload = {
+    entityName: 'Hero',
+    entityOp: EntityOp.ADD_ALL,
+    data: adddata,
+    };
+    const addall = new EntityActionFactory().create(payload)
+    this.store.dispatch(addall);
+  }
+
+
+  saveaddmany(): void {
+    const addrows: Hero[] = [{id: 3, name: 'fgg',saying: 'picgfgfo',dateLoaded: '58452-55-99'},
+                            {id:4, name: 'magffgco',saying: 'ghghjjj',dateLoaded: 'r343-99-99'}]
+    const payload: EntityActionPayload = {
+     entityName: 'Hero',
+     entityOp: EntityOp.SAVE_ADD_MANY,
+     data: addrows,
+    };
+    const addsavemanyactions = new EntityActionFactory().create(payload)
+    this.store.dispatch(addsavemanyactions);
+  }
+
+  saveaddmanysuccess(): void {
+    const addrows: Hero[] = [{id: 3, name: 'fgg',saying: 'picgfgfo',dateLoaded: '58452-55-99'},
+                            {id:4, name: 'magffgco',saying: 'ghghjjj',dateLoaded: 'r343-99-99'}]
+    const payload: EntityActionPayload = {
+     entityName: 'Hero',
+     entityOp: EntityOp.SAVE_ADD_MANY_SUCCESS,
+     data: addrows,
+    };
+    const addsavemanyactions = new EntityActionFactory().create(payload)
+    this.store.dispatch(addsavemanyactions);
+  }
+
+  saveaddmanyerror(): void {
+    const addrows: Hero[] = [{id: 3, name: 'fgg',saying: 'picgfgfo',dateLoaded: '58452-55-99'},
+                            {id:4, name: 'magffgco',saying: 'ghghjjj',dateLoaded: 'r343-99-99'}]
+    const payload: EntityActionPayload = {
+     entityName: 'Hero',
+     entityOp: EntityOp.SAVE_ADD_MANY_ERROR,
+     data: addrows,
+    };
+    const addsavemanyactions = new EntityActionFactory().create(payload)
+    this.store.dispatch(addsavemanyactions);
+  }
+
+  saveaddone(): void {
+    const addhero: Hero = {id: 3, name: 'josre',saying: 'wewew',dateLoaded: '2323-23-33'}
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_ADD_ONE,
+      data: addhero,
+    };
+    const Addactionone = new EntityActionFactory().create(payload)
+    this.store.dispatch(Addactionone);
+  }
+
+
+  saveaddonesuccess(): void {
+    const addhero: Hero = {id: 3, name: 'josre',saying: 'wewew',dateLoaded: '4444-44-44'}
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_ADD_ONE_SUCCESS,
+      data: addhero,
+    };
+    const Addactionone = new EntityActionFactory().create(payload)
+    this.store.dispatch(Addactionone);
+  }
+
+  saveaddoneerror(): void {
+    const addhero: Hero = {id: 3, name: 'josre',saying: 'wewew',dateLoaded: '3434-44-66'}
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_ADD_ONE_ERROR,
+      data: addhero,
+    };
+    const Addactionone = new EntityActionFactory().create(payload)
+    this.store.dispatch(Addactionone);
   }
 
 
