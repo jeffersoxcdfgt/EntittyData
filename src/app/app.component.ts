@@ -3,7 +3,7 @@ import { Hero } from './models/hero';
 import { EntityActionFactory, EntityActionPayload, EntityCache, EntityCollection, EntityCollectionService, EntityOp, EntityServices } from '@ngrx/data';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { Update} from '@ngrx/entity';
+import { Update } from '@ngrx/entity';
 
 @Component({
   selector: 'app-root',
@@ -363,11 +363,83 @@ export class AppComponent implements OnInit  {
     this.store.dispatch(UpsertctionMany);
   }
 
-  delete(): void {
+  removeone(): void {
     const Deleteaction = new EntityActionFactory().create<number>(
       'Hero',
       EntityOp.REMOVE_ONE,
       2,
+    );
+    this.store.dispatch(Deleteaction);
+  }
+
+  removemany(): void {
+    const Deleteactionmany = new EntityActionFactory().create<number[]>(
+      'Hero',
+      EntityOp.REMOVE_MANY,
+      [1,2],
+    );
+    this.store.dispatch(Deleteactionmany);
+  }
+
+  removeall(): void {
+    const Deleteactionall = new EntityActionFactory().create<number[]>(
+      'Hero',
+      EntityOp.REMOVE_ALL
+    );
+    this.store.dispatch(Deleteactionall);
+  }
+
+  savedeleteone(): void {
+    const Deleteaction = new EntityActionFactory().create<number>(
+      'Hero',
+      EntityOp.SAVE_DELETE_ONE,
+      2,
+    );
+    this.store.dispatch(Deleteaction);
+  }
+
+  savedeleteonesuccess(): void {
+    const Deleteaction = new EntityActionFactory().create<number>(
+      'Hero',
+      EntityOp.SAVE_DELETE_ONE_SUCCESS,
+      2,
+    );
+    this.store.dispatch(Deleteaction);
+  }
+
+  savedeleteonerror(): void {
+    const Deleteaction = new EntityActionFactory().create<number>(
+      'Hero',
+      EntityOp.SAVE_DELETE_ONE_ERROR,
+      2,
+    );
+    this.store.dispatch(Deleteaction);
+  }
+
+
+  savedeletemany(): void {
+    const Deleteaction = new EntityActionFactory().create<number[]>(
+      'Hero',
+      EntityOp.SAVE_DELETE_MANY,
+      [1,2]
+    );
+    this.store.dispatch(Deleteaction);
+  }
+
+  savedeletemanysuccess(): void {
+    const Deleteaction = new EntityActionFactory().create<number[]>(
+      'Hero',
+      EntityOp.SAVE_DELETE_MANY_SUCCESS,
+      [1,2]
+    );
+    this.store.dispatch(Deleteaction);
+  }
+
+  savedeletemanyerror(): void {
+    const Deleteaction = new EntityActionFactory().create<number[]>(
+      'Hero',
+      EntityOp.SAVE_DELETE_MANY_ERROR,
+      [1,2]
     );
     this.store.dispatch(Deleteaction);
   }

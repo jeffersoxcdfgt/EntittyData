@@ -16,13 +16,12 @@ export class AppInMemoryApi  implements InMemoryDbService{
               saying: 'my favorite herroes 2',
               dateLoaded: '2021-05-31'
             },
-            /*{
-              id: 1,
+           /* {
+              id: 3,
               name: 'Heroe 3',
-              saying: 'my favorite herroes',
-              dateLoaded: '2021-05-30'
+              saying: 'my favorite herroes 3',
+              dateLoaded: '2021-06-30'
             }*/
-            
            ]
         }
     }
