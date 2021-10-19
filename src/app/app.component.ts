@@ -163,6 +163,105 @@ export class AppComponent implements OnInit  {
     this.store.dispatch(UpdateactionMany);
   }
 
+
+  upsertone(): void {
+    const idprocess = 2
+    const hero: Hero ={id: idprocess, name: 'fghfhfhf',saying: 'ttttt',dateLoaded: '9898-34-77'};
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.UPSERT_ONE,
+      data: hero,
+      //mergeStrategy: MergeStrategy.IgnoreChanges,
+      // .. other options ..
+    };
+    const Upsertaction = new EntityActionFactory().create(payload)
+    this.store.dispatch(Upsertaction);
+  }
+
+
+  upsertmany(): void {
+    const upsert: Hero[] = [{id: 1, name: 'pilo',saying: 'pico',dateLoaded: '5852-55-99'},
+                            {id:2, name: 'maco',saying: 'jjj',dateLoaded: '8454-99-99'}]
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.UPSERT_MANY,
+      data: upsert,
+    };
+    const UpsertctionMany = new EntityActionFactory().create(payload)
+    this.store.dispatch(UpsertctionMany);
+  }
+
+  saveupsertone() : void {
+    const saveupsertone: Hero = {id: 3, name: 'xilo',saying: 'xilo',dateLoaded: '1122-55-77'}
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_UPSERT_ONE,
+      data: saveupsertone,
+    };
+    const UpsertctionOne = new EntityActionFactory().create(payload)
+    this.store.dispatch(UpsertctionOne);
+
+  }
+
+  saveupsertonesuccess() : void {
+    const saveupsertonesucess: Hero = {id: 2, name: 'POPEYE',saying: 'pppp',dateLoaded: '5677-55-78'}
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_UPSERT_ONE_SUCCESS,
+      data: saveupsertonesucess,
+    };
+    const UpsertctionOne = new EntityActionFactory().create(payload)
+    this.store.dispatch(UpsertctionOne);
+  }
+
+  saveupsertoneerror() : void {
+    const saveupsertonesucess: Hero = {id: 2, name: 'LICA',saying: 'lll',dateLoaded: '8877-99-44'}
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_UPSERT_ONE_ERROR,
+      data: saveupsertonesucess,
+    };
+    const UpsertctionOne = new EntityActionFactory().create(payload)
+    this.store.dispatch(UpsertctionOne);
+
+  }
+
+  saveupsertmany() : void {
+    const upsertmany: Hero[] = [{id: 3, name: 'frvg',saying: 'ghj',dateLoaded: '94541-85-93'},
+                            {id:4, name: 'Uva',saying: 'ghgh',dateLoaded: '8552-89-56'}]
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_UPSERT_MANY,
+      data: upsertmany,
+    };
+    const UpsertctionMany = new EntityActionFactory().create(payload)
+    this.store.dispatch(UpsertctionMany);
+  }
+
+  saveupsertmanysuccess() : void {
+    const upsertmany: Hero[] = [{id: 3, name: 'frvg',saying: 'ghj',dateLoaded: '94541-85-93'},
+                            {id:4, name: 'Uva',saying: 'ghgh',dateLoaded: '8552-89-56'}]
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_UPSERT_MANY_SUCCESS,
+      data: upsertmany,
+    };
+    const UpsertctionMany = new EntityActionFactory().create(payload)
+    this.store.dispatch(UpsertctionMany);
+  }
+
+  saveupsertmanyerror() : void {
+    const upsertmany: Hero[] = [{id: 3, name: 'frvg',saying: 'ghj',dateLoaded: '94541-85-93'},
+                            {id:4, name: 'Uva',saying: 'ghgh',dateLoaded: '8552-89-56'}]
+    const payload: EntityActionPayload = {
+      entityName: 'Hero',
+      entityOp: EntityOp.SAVE_UPSERT_MANY_ERROR,
+      data: upsertmany,
+    };
+    const UpsertctionMany = new EntityActionFactory().create(payload)
+    this.store.dispatch(UpsertctionMany);
+  }
+
   delete(): void {
     const Deleteaction = new EntityActionFactory().create<number>(
       'Hero',
