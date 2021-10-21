@@ -9,6 +9,7 @@ import { DefaultDataServiceConfig, EntityDataModule, HttpUrlGenerator, Pluralize
 import { entityConfig } from './entity/entity-metadata';
 import { AppComponent } from './app.component';
 import { PluralHttpUrlGenerator } from './pluralnames/pluralgenerator';
+import { ActionsEntityEffects } from './effects/actions.effects';
 
 
 /*const defaultDataServiceConfig: DefaultDataServiceConfig = {
@@ -25,7 +26,7 @@ import { PluralHttpUrlGenerator } from './pluralnames/pluralgenerator';
     HttpClientModule,
      HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
      StoreModule.forRoot({}),
-     EffectsModule.forRoot([]),
+     EffectsModule.forRoot([ActionsEntityEffects]),
      EntityDataModule.forRoot(entityConfig),
     BrowserModule
   ],
