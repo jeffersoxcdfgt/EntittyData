@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect} from "@ngrx/effects";
+import { Actions, createEffect, ofType} from "@ngrx/effects";
 import {
   ofEntityType,
   ofEntityOp,
   EntityOp,
-  EntityAction
+  EntityAction,
+  EntityActionPayload
 } from "@ngrx/data";
 import { tap } from "rxjs/operators";
-
+import { Hero } from '../models/hero';
 
 @Injectable()
 export class ActionsEntityEffects {
@@ -17,10 +18,22 @@ export class ActionsEntityEffects {
       this.actions$.pipe(
       ofEntityType('Hero'),
         ofEntityOp(EntityOp.ADD_ONE),
-          tap((_) => console.log('Calling effect per Entity Actions'))
+          tap((data: EntityAction) =>{
+            const paylod:EntityActionPayload = data.payload
+            console.log('Calling effect per Entity Actions')
+          })
       ),
       { dispatch: false }
   )
+
+  // Action get for data
+  ngrxCustomDataEffect$ = createEffect(() =>
+    this.actions$.pipe(
+     ofType('[Hero] ngrx/data/custom-action'),
+        tap((data:EntityAction) => console.log('Calling effect for Custom Actions ',data.payload))
+    ),
+    { dispatch: false }
+)
 
   constructor(private actions$: Actions<EntityAction>) { }
 

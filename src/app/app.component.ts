@@ -462,16 +462,21 @@ export class AppComponent implements OnInit  {
     this.store.dispatch(Queryaction);
   }
 
+  customEvent() : void {
+    const owntype = new EntityActionFactory().formatActionType('ngrx/data/custom-action','Hero')
+    this.store.dispatch({ type:owntype , payload:{ name:'jefferson'} })
+  }
+
 
 
   getById = () =>{
     /*const hero = { id: 1 } as Hero;
-    const QueryByIdaction = new EntityActionFactory().create<Hero>(      
+    const QueryByIdaction = new EntityActionFactory().create<Hero>(
       'Hero',
       EntityOp.QUERY_BY_KEY_SUCCESS,
       hero,
     );
-    this.store.dispatch(QueryByIdaction);   */ 
+    this.store.dispatch(QueryByIdaction);   */
   }
 
   getChanges = () =>{
