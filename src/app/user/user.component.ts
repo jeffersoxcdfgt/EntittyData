@@ -1,9 +1,7 @@
 import { Component , OnInit} from '@angular/core';
-import { EntityState } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
-import { User } from './model/user';
-import { loadUsers, selectUsersList } from './store/actions/user.actions';
+import { selectUsersList } from './store/actions/user.actions';
 
 
 @Component({
