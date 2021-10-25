@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EntityState } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { User } from '../model/user';
 import { selectAllUsers } from '../store/reducers/user.reducer';
@@ -12,14 +12,15 @@ import { selectAllUsers } from '../store/reducers/user.reducer';
 })
 export class UserListComponent implements OnInit {
 
-  //users : Observable<User[]>;
+  users : Observable<User[]> =  of<User[]>()
 
   constructor(private store :Store<AppState>){
   }
 
   ngOnInit(): void{
-    this.store.select(selectAllUsers).subscribe((data:User[])=>{
-          console.log(data)
+    this.users =this.store.select(selectAllUsers)
+    this.users.subscribe((data:User[])=>{
+      console.log(data)
     })
-  }
+}
 }
