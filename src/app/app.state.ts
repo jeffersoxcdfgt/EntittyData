@@ -1,5 +1,5 @@
-/*import * as fromTeams from './teams/store/reducers/teams.reducers';
+import * as fromUser from './user/store/reducers/user.reducer';
 
 export interface AppState {
-  user:fromTeams.State;
-}*/
+  user:fromUser.State;
+}

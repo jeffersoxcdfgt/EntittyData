@@ -6,11 +6,19 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppInMemoryApi } from './app.in-memory.api';
 import { AppComponent } from './app.component';
 import {APP_BASE_HREF} from '@angular/common';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { EntityDataModule, HttpUrlGenerator } from '@ngrx/data';
 import { PluralHttpUrlGenerator } from './shared/pluralgenerator';
 import { EffectsModule } from '@ngrx/effects';
 import { entityConfig } from './shared/entity/entity-metadata';
+import  * as userReducers from './user/store/reducers/user.reducer';
+import { UserEffects } from './user/store/effects/user.effect';
+import { UserService } from './user/store/services/user.service';
+
+export const reducers: ActionReducerMap<any> = {
+  user:userReducers.reducer,
+}
+
 
 @NgModule({
   declarations: [
@@ -21,14 +29,15 @@ import { entityConfig } from './shared/entity/entity-metadata';
     HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([UserEffects]),
     EntityDataModule.forRoot(entityConfig),
-   BrowserModule
+    BrowserModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
-    { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+    { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator },
+    UserService
 
   ],
   bootstrap: [AppComponent]
