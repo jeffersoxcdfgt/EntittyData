@@ -2,6 +2,8 @@ import { Action, createFeatureSelector, createReducer, createSelector, on } from
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { User } from '../../model/user';
 import * as UserActions from '../actions/user.actions';
+import { EntitySelectorsFactory } from '@ngrx/data';
+import { Hero } from 'src/app/heroe/model/hero';
 
 export interface State extends EntityState<User> {
   // additional entities state properties
@@ -10,6 +12,7 @@ export interface State extends EntityState<User> {
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
 export const selectUserState = createFeatureSelector<State>('user');
+export const heroeSelectors = new EntitySelectorsFactory().create<Hero>('Hero');
 
 export const initialState: State = adapter.getInitialState({
   // additional entity state properties
@@ -93,6 +96,18 @@ export const selectAllUsers = selectAll;
 
 // select the total user count
 export const selectUserTotal = selectTotal;
+
+
+export const selectedUserWithHeroes = createSelector(
+  selectAllUsers,
+  heroeSelectors.selectEntities,
+  (users, heroeEntities) => users.map(user => ({
+      ...user,
+      heroes: heroeEntities
+      }
+    )
+  )
+);
 
 
 

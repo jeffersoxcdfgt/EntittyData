@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { User } from '../model/user';
-import { selectAllUsers } from '../store/reducers/user.reducer';
+import { selectAllUsers, selectedUserWithHeroes } from '../store/reducers/user.reducer';
 
 @Component({
   selector: 'app-user-list',
@@ -19,8 +19,14 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void{
     this.users =this.store.select(selectAllUsers)
-    this.users.subscribe((data:User[])=>{
+    /*this.users.subscribe((data:User[])=>{
       console.log(data)
+    })*/
+
+    this.store.select(selectedUserWithHeroes).subscribe((cross)=>{
+        if(cross.length >0 && cross[0].hasOwnProperty('heroes')){
+          console.log(cross)
+        }
     })
-}
+  }
 }
