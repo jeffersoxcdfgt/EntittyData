@@ -6,18 +6,31 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppInMemoryApi } from './app.in-memory.api';
 import { AppComponent } from './app.component';
 import {APP_BASE_HREF} from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EntityDataModule, HttpUrlGenerator } from '@ngrx/data';
+import { PluralHttpUrlGenerator } from './shared/pluralgenerator';
+import { EffectsModule } from '@ngrx/effects';
+import { entityConfig } from './shared/entity/entity-metadata';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
     BrowserModule,
-    AppRoutingModule // CLI adds AppRoutingModule to the AppModule's imports array
+    AppRoutingModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot(entityConfig),
+   BrowserModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [
+    {provide: APP_BASE_HREF, useValue: '/'},
+    { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path:'user',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+  },
+  {
+    path:'heroe',
+    loadChildren: () => import('./heroe/heroe.module').then(h => h.HeroeModule)
   }
 ]; // sets up routes constant where you define your routes
 
