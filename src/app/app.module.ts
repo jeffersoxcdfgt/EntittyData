@@ -14,11 +14,14 @@ import { entityConfig } from './shared/entity/entity-metadata';
 import  * as userReducers from './user/store/reducers/user.reducer';
 import { UserEffects } from './user/store/effects/user.effect';
 import { UserService } from './user/store/services/user.service';
+import  * as bookReducers from './book/store/reducers/book.reducer';
+import { BookEffects } from './book/store/effects/book.effect';
+import { BookService } from './book/store/services/book.service';
 
 export const reducers: ActionReducerMap<any> = {
   user:userReducers.reducer,
+  book:bookReducers.reducer
 }
-
 
 @NgModule({
   declarations: [
@@ -30,15 +33,15 @@ export const reducers: ActionReducerMap<any> = {
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects,BookEffects]),
     EntityDataModule.forRoot(entityConfig),
     BrowserModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator },
-    UserService
-
+    UserService,
+    BookService
   ],
   bootstrap: [AppComponent]
 })

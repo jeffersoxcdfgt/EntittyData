@@ -26,6 +26,28 @@ export class AppInMemoryApi  implements InMemoryDbService{
               saying: 'my favorite heroes 2',
               dateLoaded: '2021-05-28'
             }
+           ],
+           books:[
+             {
+              id: 1,
+              userId: 1,
+              name: 'book1'
+             },
+             {
+              id: 2,
+              userId: 1,
+              name: 'book2'
+             },
+             {
+              id: 3,
+              userId: 1,
+              name: 'book3'
+             },
+             {
+              id: 4,
+              userId: 2,
+              name: 'book4'
+             }
            ]
         }
     }
