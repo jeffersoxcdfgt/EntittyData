@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl:'http://api.aviationstack.com/v1',
+  access_key:'6edbd115041a1daf13aed3ffcad2eef5'
 };
 
 /*

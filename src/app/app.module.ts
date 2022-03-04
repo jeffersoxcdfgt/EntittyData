@@ -17,23 +17,27 @@ import { UserService } from './user/store/services/user.service';
 import  * as bookReducers from './book/store/reducers/book.reducer';
 import { BookEffects } from './book/store/effects/book.effect';
 import { BookService } from './book/store/services/book.service';
+import  * as fligthsReducers from './flights/store/reducers/fligths.reducer';
+import { FligthskEffects } from './flights/store/effects/fligths.effect';
+import { FligthsService } from './flights/store/services/fligths.service';
+
 
 export const reducers: ActionReducerMap<any> = {
   user:userReducers.reducer,
-  book:bookReducers.reducer
+  book:bookReducers.reducer,
+  fligths:fligthsReducers.reducer
 }
 
 @NgModule({
   declarations: [
-    AppComponent,
-  ],
+    AppComponent,  ],
   imports: [
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
+    //HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([UserEffects,BookEffects]),
+    EffectsModule.forRoot([UserEffects,BookEffects,FligthskEffects]),
     EntityDataModule.forRoot(entityConfig),
     BrowserModule
   ],
@@ -41,7 +45,8 @@ export const reducers: ActionReducerMap<any> = {
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator },
     UserService,
-    BookService
+    BookService,
+    FligthsService
   ],
   bootstrap: [AppComponent]
 })
