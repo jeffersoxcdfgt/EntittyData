@@ -1,0 +1,7 @@
+.ng-select.custom ::ng-deep .ng-select-container .ng-arrow-wrapper  {
+    display: none;
+}
+
+.delay_row{
+    color: red;
+}

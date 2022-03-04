@@ -2,6 +2,9 @@ import {  AppAction } from '../../../app.action';
 import { createFeatureSelector , createSelector, on , createReducer } from '@ngrx/store';
 import * as fligthsActions from '../actions/fligths.actions';
 import { Flights } from '../../class/flights';
+import { getAllAirports } from '../../../airports/store/reducers/airports.reducer';
+import { Airport } from 'src/app/airports/class/airport';
+import { fligthsAirports } from '../../shared/utils/functions';
 
 export interface State {
   data: Flights | null ;
@@ -59,4 +62,10 @@ export const getFligthsError = createSelector(getFligthsState, (state: State) =>
     ? state.error
    : null;
 });
+
+
+export const selectFligthsAndAirports = createSelector(
+  getAllAirports,
+  getAllFlights,
+  ( allAirports: any, allFlghts: any) => fligthsAirports(allAirports['data'],allFlghts['data']));
 

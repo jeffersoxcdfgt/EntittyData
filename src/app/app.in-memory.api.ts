@@ -62,7 +62,7 @@ export class AppInMemoryApi  implements InMemoryDbService{
                   "flight_date": "2022-03-04",
                   "flight_status": "unknown",
                   "departure": {
-                    "airport": "Guangzhou Baiyun International",
+                    "airport": "Anaa",
                     "timezone": "Asia/Shanghai",
                     "iata": "CAN",
                     "icao": "ZGGG",
@@ -108,7 +108,7 @@ export class AppInMemoryApi  implements InMemoryDbService{
                   "flight_date": "2022-03-04",
                   "flight_status": "cancelled",
                   "departure": {
-                    "airport": "Hasanudin",
+                    "airport": "Arrabury",
                     "timezone": "Asia/Makassar",
                     "iata": "UPG",
                     "icao": "WAAA",
@@ -154,7 +154,7 @@ export class AppInMemoryApi  implements InMemoryDbService{
                   "flight_date": "2022-03-04",
                   "flight_status": "scheduled",
                   "departure": {
-                    "airport": "Arlanda",
+                    "airport": "Arrabury",
                     "timezone": "Europe/Stockholm",
                     "iata": "ARN",
                     "icao": "ESSA",

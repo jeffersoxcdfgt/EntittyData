@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path:'fligths',
     loadChildren: () => import('./flights/fligths.module').then(h => h.FligthsModule)
+  },
+  {
+    path:'airports',
+    loadChildren: () => import('./airports/airports.module').then(h => h.AirportsModule)
   }
 ]; // sets up routes constant where you define your routes
 

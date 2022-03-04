@@ -20,24 +20,30 @@ import { BookService } from './book/store/services/book.service';
 import  * as fligthsReducers from './flights/store/reducers/fligths.reducer';
 import { FligthskEffects } from './flights/store/effects/fligths.effect';
 import { FligthsService } from './flights/store/services/fligths.service';
+import  * as airportsReducers from './airports/store/reducers/airports.reducer';
+import { AirportsEffects } from './airports/store/effects/airports.effect';
+import { AirportsService } from './airports/store/services/airports.service';
+
 import { TraceService } from './shared/utils/traceService';
 
 export const reducers: ActionReducerMap<any> = {
   user:userReducers.reducer,
   book:bookReducers.reducer,
-  fligths:fligthsReducers.reducer
+  fligths:fligthsReducers.reducer,
+  airports:airportsReducers.reducer
 }
 
 @NgModule({
   declarations: [
-    AppComponent,  ],
+    AppComponent
+  ],
   imports: [
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([UserEffects,BookEffects,FligthskEffects]),
+    EffectsModule.forRoot([UserEffects,BookEffects,FligthskEffects,AirportsEffects]),
     EntityDataModule.forRoot(entityConfig)
   ],
   providers: [
@@ -46,6 +52,7 @@ export const reducers: ActionReducerMap<any> = {
     UserService,
     BookService,
     FligthsService,
+    AirportsService,
     TraceService,
   ],
   bootstrap: [AppComponent]

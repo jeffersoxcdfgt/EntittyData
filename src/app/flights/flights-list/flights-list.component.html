@@ -5,6 +5,8 @@
              <div class="well description">
                 <a href="#" class="close" onclick="$(this).closest('.well').hide(); return false;"><span aria-hidden="true">&times;</span></a>
                 <p>This is a test to retrive information from airfligths.</p>
+                <p> <strong>Airports testing data to look for</strong> : Anaa,Arrabury </p>
+                <p> <strong>IATA code  testing data to look for</strong> : ARN,GMP </p>
              </div>
              <!-- <Pages> -->
              <div class="page_navigator">
@@ -15,8 +17,8 @@
                   <div class="addition-block-right pull-left js-quick-filter">
                      <div class="quick-filter-toolbar btn-group">
                         <div class="input-group js-filter-control">
-                           <ng-select [items]="airports" 
-                              bindLabel="airport_name" 
+                           <ng-select [items]="airports"
+                              bindLabel="airport_name"
                               bindValue="airport_id"
                               (change)="selectAirport($event)"
                               (clear)= "clearAirport()"
@@ -28,7 +30,16 @@
                    <div class="addition-block-right pull-right js-quick-filter">
                       <div class="quick-filter-toolbar btn-group">
                          <div class="input-group js-filter-control">
-                            <input placeholder="Quick search" type="text" size="16" class="js-input form-control" name="quick_filter" value="">
+                            <ng-select
+                            class="custom"
+                            (search)="searchIATA($event)"
+                            [(ngModel)]="iatcode"
+                            [isOpen]="false"
+                            (clear)= "clearAirport()">
+                           </ng-select>
+                           <div class="input-group-btn dropdown dropdown-lg">
+                              <button type="button" style="height: 36px;" class="btn btn-default js-reset" title="Clear" (click)="clearAirport()" >Clear</button>
+                           </div>
                          </div>
                       </div>
                    </div>
@@ -65,7 +76,7 @@
                    <!--*ngFor="let cont of contratosRender | paginate: { itemsPerPage: 10, currentPage: p }" -->
                    <tbody class="pg-row-list"  >
                      <ng-template ngFor let-flight [ngForOf]="(infoshow | async)! | paginate: { itemsPerPage: 10, currentPage: p }" let-i="index">
-                      <tr class="pg-row" >
+                      <tr class="pg-row delay_row" >
                          <td>{{flight.departure.scheduled  | date }}</td>
                          <td>{{flight.flight.iata}}</td>
                          <td>{{flight.flight_status}}</td>
