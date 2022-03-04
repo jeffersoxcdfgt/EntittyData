@@ -1,19 +1,50 @@
 export interface DataFlights {
-    id: string;
-    gmt: string;
-    airport_id: string;
-    iata_code: string;
-    city_iata_code: string;
-    icao_code: string;
-    country_iso2: string;
-    geoname_id: string;
-    latitude: string;
-    longitude: string;
-    airport_name: string;
-    country_name: string;
-    phone_number: string;
-    timezone: string;
-}
+    flight_date: string;
+    flight_status: string;
+    departure: {
+      airport: string;
+      timezone: string;
+      iata: string;
+      icao: string;
+      terminal: string;
+      gate: string;
+      delay: string;
+      scheduled: string;
+      estimated: string;
+      actual: string;
+      estimated_runway: string;
+      actual_runway: string;
+    },
+    arrival: {
+      airport: string;
+      timezone: string;
+      iata: string;
+      icao: string;
+      terminal:string;
+      gate: string;
+      baggage: string;
+      delay:string;
+      scheduled: string;
+      estimated: string;
+      actual: string;
+      estimated_runway: string;
+      actual_runway: string;
+    },
+    airline: {
+      name: string;
+      iata: string;
+      icao: string;
+    },
+    flight: {
+      number: string;
+      iata: string;
+      icao: string;
+      codeshared: string;
+    },
+    aircraft: string;
+    live: string;
+  }
+
 
 
 export interface Flights {

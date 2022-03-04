@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://api.aviationstack.com/v1',
+  apiUrl:'http://localhost:4200',
   access_key:'6edbd115041a1daf13aed3ffcad2eef5'
 };
 

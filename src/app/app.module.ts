@@ -22,7 +22,6 @@ import { FligthskEffects } from './flights/store/effects/fligths.effect';
 import { FligthsService } from './flights/store/services/fligths.service';
 import { TraceService } from './shared/utils/traceService';
 
-
 export const reducers: ActionReducerMap<any> = {
   user:userReducers.reducer,
   book:bookReducers.reducer,
@@ -34,13 +33,12 @@ export const reducers: ActionReducerMap<any> = {
     AppComponent,  ],
   imports: [
     HttpClientModule,
-    //HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
+    HttpClientInMemoryWebApiModule.forRoot(AppInMemoryApi),
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([UserEffects,BookEffects,FligthskEffects]),
-    EntityDataModule.forRoot(entityConfig),
-    BrowserModule
+    EntityDataModule.forRoot(entityConfig)
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},

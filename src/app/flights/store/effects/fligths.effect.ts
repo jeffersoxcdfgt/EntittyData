@@ -12,7 +12,7 @@ export class FligthskEffects {
     ofType(FligthsActionTypes.GET_FLIGTHS),
     mergeMap(() => this.fligthsService.findAll()
       .pipe(
-        map((listfligths:Flights) => ({ type: FligthsActionTypes.GET_FLIGTHS_SUCCESS, flights: listfligths }))
+        map((listfligths: any) => ({ type: FligthsActionTypes.GET_FLIGTHS_SUCCESS, flights: listfligths[0] }))
       ))
     )
   );

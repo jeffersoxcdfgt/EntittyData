@@ -29,7 +29,7 @@ const fligthsReducer = createReducer(
     }) =>
      ({
         ...state,
-        data: flights === undefined ? state.data : flights ,
+        data: flights ,
         done: true,
         error: null
       })),

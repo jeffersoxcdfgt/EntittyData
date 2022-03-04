@@ -17,7 +17,7 @@ export class FligthsService {
    * @returns gets the list of objects found
    */
   public findAll(): Observable<Flights>{
-    return this.http.get<Flights>(`${this.URL}/flights?access_key=${environment.access_key}`).pipe(
+    return this.http.get<Flights>(`${this.URL}/api/fligths`).pipe(
         tap(_ => console.log('fetched fligths')),
         catchError(this.traceService.handleError<Flights>('findAll'))
     );

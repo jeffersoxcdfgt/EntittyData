@@ -12,18 +12,25 @@
              <!-- </Pages> -->
              <div class="grid grid-table js-grid">
                 <div class="addition-block js-actions">
-                   <div class="btn-toolbar addition-block-left pull-left">
-                      <div class="btn-group">
-                        <input placeholder="Quick search" type="text" size="16" class="js-input form-control" name="quick_filter" value="">
-                      </div>
-                   </div>
+                  <div class="addition-block-right pull-left js-quick-filter">
+                     <div class="quick-filter-toolbar btn-group">
+                        <div class="input-group js-filter-control">
+                           <ng-select [items]="airports" 
+                              bindLabel="airport_name" 
+                              bindValue="airport_id"
+                              (change)="selectAirport($event)"
+                              (clear)= "clearAirport()"
+                              [(ngModel)]="selectedAirport">
+                           </ng-select>
+                        </div>
+                     </div>
+                  </div>
                    <div class="addition-block-right pull-right js-quick-filter">
                       <div class="quick-filter-toolbar btn-group">
                          <div class="input-group js-filter-control">
                             <input placeholder="Quick search" type="text" size="16" class="js-input form-control" name="quick_filter" value="">
                          </div>
                       </div>
-                      <span class="hidden-xs">&thinsp;</span>
                    </div>
                 </div>
                 <div class="filter-status js-filter-status">
@@ -55,16 +62,19 @@
                          </th>
                       </tr>
                    </thead>
-                   <tbody class="pg-row-list">
-                      <tr class="pg-row">
-                         <td>Kobe 1</td>
-                         <td>Kobe 2</td>
-                         <td>Kobe 3</td>
-                         <td>Kobe 4</td>
-                         <td>Kobe 5</td>
-                         <td>Kobe 6</td>
-                         <td>Kobe 7</td>
+                   <!--*ngFor="let cont of contratosRender | paginate: { itemsPerPage: 10, currentPage: p }" -->
+                   <tbody class="pg-row-list"  >
+                     <ng-template ngFor let-flight [ngForOf]="(infoshow | async)! | paginate: { itemsPerPage: 10, currentPage: p }" let-i="index">
+                      <tr class="pg-row" >
+                         <td>{{flight.departure.scheduled  | date }}</td>
+                         <td>{{flight.flight.iata}}</td>
+                         <td>{{flight.flight_status}}</td>
+                         <td>{{flight.arrival.terminal}}</td>
+                         <td>{{flight.arrival.gate}}</td>
+                         <td>{{flight.arrival.scheduled | date }}</td>
+                         <td>{{flight.arrival.estimated | date }}</td>
                       </tr>
+                    </ng-template>
                    </tbody>
                    <tfoot>
                    </tfoot>
@@ -72,25 +82,8 @@
              </div>
              <!-- <Pages> -->
              <div class="page_navigator">
-                <div class="pgui-pagination" data-total-record-count="181">
-                   <ul class="pagination">
-                      <li class="disabled">
-                         <a href="#" aria-label="Previous" class="pgui-pagination-prev">
-                         <span aria-hidden="true">&laquo;</span>
-                         </a>
-                      </li>
-                      <li class="active"><a href="#" title="Records 1 to 12 of 181">1</a></li>
-                      <li class="hidden-xs"><a href="#" title="Records 13 to 24 of 181" data-pgui-shortcut="Ctrl+right">2</a></li>
-                      <li class="pagination-spacer hidden-xs"><a href="#" title="" onclick="return false;">...</a></li>
-                      <li class="hidden-xs"><a href="#" title="Records 121 to 132 of 181">11</a></li>
-                      <li class="pagination-spacer hidden-xs"><a href="#" title="" onclick="return false;">...</a></li>
-                      <li class="hidden-xs"><a href="#" title="Records 181 to 181 of 181">16</a></li>
-                      <li>
-                         <a href="#" aria-label="Next" class="pgui-pagination-next">
-                         <span aria-hidden="true">&raquo;</span>
-                         </a>
-                      </li>
-                   </ul>
+                <div class="pgui-pagination">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
              </div>
           </div>
