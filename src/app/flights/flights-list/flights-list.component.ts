@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
+import { Flights } from '../class/flights';
+import { BecomeFligths, cleanFligths } from '../shared/utils/functions';
 import { getAllFlights } from '../store/reducers/fligths.reducer';
 
 @Component({
@@ -13,8 +15,8 @@ export class FlightsListComponent implements OnInit {
   constructor(private store :Store<AppState>){ }
 
   ngOnInit(): void {
-    this.store.select(getAllFlights).subscribe((books)=>{
-      console.log("fligths",books)
+    this.store.select(getAllFlights).pipe(cleanFligths,BecomeFligths).subscribe((flights: Flights)=>{
+      console.log("fligths",flights.data)
     })
   }
 

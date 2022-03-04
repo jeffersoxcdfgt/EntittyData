@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Flights } from '../../class/flights';
 
 export enum FligthsActionTypes {
   GET_FLIGTHS = '[All] Fligths',
@@ -9,5 +10,5 @@ export enum FligthsActionTypes {
 // list fligths
 
 export const fligthsGetAll = createAction(FligthsActionTypes.GET_FLIGTHS);
-export const fligthsGetAllSuccess = createAction(FligthsActionTypes.GET_FLIGTHS_SUCCESS, props<{flights: any[]}>());
+export const fligthsGetAllSuccess = createAction(FligthsActionTypes.GET_FLIGTHS_SUCCESS, props<{flights: Flights}>());
 export const fligthsGetAllError = createAction(FligthsActionTypes.GET_FLIGTHS_ERROR, props<{err: Error}>());

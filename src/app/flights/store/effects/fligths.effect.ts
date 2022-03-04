@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import {  map, mergeMap } from 'rxjs/operators';
 import { FligthsService } from '../services/fligths.service';
 import { FligthsActionTypes } from '../actions/fligths.actions';
+import { Flights } from '../../class/flights';
 
 @Injectable()
 export class FligthskEffects {
@@ -11,7 +12,7 @@ export class FligthskEffects {
     ofType(FligthsActionTypes.GET_FLIGTHS),
     mergeMap(() => this.fligthsService.findAll()
       .pipe(
-        map((listfligths:any[]) => ({ type: FligthsActionTypes.GET_FLIGTHS_SUCCESS, flights: listfligths }))
+        map((listfligths:Flights) => ({ type: FligthsActionTypes.GET_FLIGTHS_SUCCESS, flights: listfligths }))
       ))
     )
   );

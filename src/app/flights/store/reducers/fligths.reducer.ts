@@ -1,18 +1,17 @@
 import {  AppAction } from '../../../app.action';
 import { createFeatureSelector , createSelector, on , createReducer } from '@ngrx/store';
 import * as fligthsActions from '../actions/fligths.actions';
+import { Flights } from '../../class/flights';
 
 export interface State {
-  data: any[];
-  selected: any;
+  data: Flights | null ;
   action: string | null ;
   done: boolean;
   error?: Error | null;
 }
 
 const initialState: State  = {
-  data: [],
-  selected: null,
+  data: null,
   action: null,
   done: false,
   error: null
@@ -24,7 +23,6 @@ const fligthsReducer = createReducer(
   on(fligthsActions.fligthsGetAll, state => ({...state,
     action: fligthsActions.FligthsActionTypes.GET_FLIGTHS,
     done: false,
-    selected: null,
     error: null
   })),
   on(fligthsActions.fligthsGetAllSuccess, (state, { flights
@@ -33,14 +31,12 @@ const fligthsReducer = createReducer(
         ...state,
         data: flights === undefined ? state.data : flights ,
         done: true,
-        selected: null,
         error: null
       })),
   on(fligthsActions.fligthsGetAllError, (state, { err }) =>
     ({
       ...state,
        done: true,
-       selected: null,
        error: err
     })),
 

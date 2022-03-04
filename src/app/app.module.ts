@@ -20,6 +20,7 @@ import { BookService } from './book/store/services/book.service';
 import  * as fligthsReducers from './flights/store/reducers/fligths.reducer';
 import { FligthskEffects } from './flights/store/effects/fligths.effect';
 import { FligthsService } from './flights/store/services/fligths.service';
+import { TraceService } from './shared/utils/traceService';
 
 
 export const reducers: ActionReducerMap<any> = {
@@ -46,7 +47,8 @@ export const reducers: ActionReducerMap<any> = {
     { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator },
     UserService,
     BookService,
-    FligthsService
+    FligthsService,
+    TraceService,
   ],
   bootstrap: [AppComponent]
 })
