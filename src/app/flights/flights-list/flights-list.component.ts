@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { DataAirport } from 'src/app/airports/class/airport';
 import { getAllAirports } from 'src/app/airports/store/reducers/airports.reducer';
 import { AppState } from 'src/app/app.state';
@@ -11,7 +10,7 @@ import { BecomeAirports,
           BecomeDataFligths,
           BecomeFligths,
           cleanAiports,
-          cleanFligths, 
+          cleanFligths,
           filterForAirport,
           filterForIATA} from '../shared/utils/functions';
 import { getAllFlights } from '../store/reducers/fligths.reducer';
@@ -33,6 +32,9 @@ export class FlightsListComponent implements OnInit {
   selectedAirport: number = 0;
   airports: any = []
   iatcode: string = ''
+  flagBoo: boolean = true
+  textbutton: string = "Check arrivals"
+  titletext = 'Departure'
 
   constructor(private store :Store<AppState>){ }
 
@@ -59,4 +61,27 @@ export class FlightsListComponent implements OnInit {
     this.infoshow = this.store.select(getAllFlights).pipe(cleanFligths,BecomeFligths,BecomeDataFligths)
   }
 
+  getDelay(flight: DataFlights): string {
+    if(!!flight.departure.delay && Number(flight.departure.delay) >= 5){
+      return 'red';
+    }
+    return ''
+  }
+
+  changeData(): void{
+    this.flagBoo =  this.flagBoo === true ? false : true;
+    this.textbutton = this.textbutton === "Check arrivals" ? "Check departures" : "Check arrivals"
+    this.titletext = this.titletext === "Departure" ? "Arrivals" : "Departure"
+  }
+
+  getDelayAndStatus(arrival: DataFlights): string {
+    if(!!arrival.arrival.delay && Number(arrival.arrival.delay) >= 5){
+      return 'red';
+    }
+
+    if(!!arrival.flight_status && arrival.flight_status.toLowerCase() === 'landed'){
+      return 'green';
+    }
+    return ''
+  }
 }

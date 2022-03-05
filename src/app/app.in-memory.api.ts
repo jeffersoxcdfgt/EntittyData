@@ -60,7 +60,7 @@ export class AppInMemoryApi  implements InMemoryDbService{
               "data": [
                 {
                   "flight_date": "2022-03-04",
-                  "flight_status": "unknown",
+                  "flight_status": "landed",
                   "departure": {
                     "airport": "Anaa",
                     "timezone": "Asia/Shanghai",

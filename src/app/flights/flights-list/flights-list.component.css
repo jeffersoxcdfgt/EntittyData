@@ -5,3 +5,8 @@
 .delay_row{
     color: red;
 }
+
+.parent {
+    display: flex;
+    justify-content: space-between;
+}

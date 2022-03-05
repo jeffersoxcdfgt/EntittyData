@@ -7,6 +7,8 @@
                 <p>This is a test to retrive information from airfligths.</p>
                 <p> <strong>Airports testing data to look for</strong> : Anaa,Arrabury </p>
                 <p> <strong>IATA code  testing data to look for</strong> : ARN,GMP </p>
+                <p> <strong>Rows are red when delay is  </strong> :  >= 5</p>
+                <p> <strong>Rows are green when fligth is </strong> : status is Landed</p>
              </div>
              <!-- <Pages> -->
              <div class="page_navigator">
@@ -44,10 +46,13 @@
                       </div>
                    </div>
                 </div>
-                <div class="filter-status js-filter-status">
-                </div>
+                <div class="filter-status js-filter-status"></div>
                 <div class="js-grid-message-container"></div>
-                <table class="table text-center table-striped fixed-header">
+                <div  class="parent">
+                  <div><legend>{{titletext}}</legend></div>
+                  <div><button type="button" style="height: 36px;" class="btn" (click)="changeData()" title="Check arrivals">{{textbutton}}</button></div>
+                </div>
+                <table class="table text-center table-striped fixed-header" *ngIf="flagBoo; else elseBlock" >
                    <thead class="js-column-filter-container">
                       <tr>
                          <th colspan="1" rowspan="1" class="sortable">
@@ -73,10 +78,9 @@
                          </th>
                       </tr>
                    </thead>
-                   <!--*ngFor="let cont of contratosRender | paginate: { itemsPerPage: 10, currentPage: p }" -->
                    <tbody class="pg-row-list"  >
                      <ng-template ngFor let-flight [ngForOf]="(infoshow | async)! | paginate: { itemsPerPage: 10, currentPage: p }" let-i="index">
-                      <tr class="pg-row delay_row" >
+                      <tr class="pg-row" [ngStyle]="{'color':getDelay(flight)}">
                          <td>{{flight.departure.scheduled  | date }}</td>
                          <td>{{flight.flight.iata}}</td>
                          <td>{{flight.flight_status}}</td>
@@ -90,6 +94,50 @@
                    <tfoot>
                    </tfoot>
                 </table>
+                <ng-template #elseBlock>
+                  <table class="table text-center table-striped fixed-header">
+                     <thead class="js-column-filter-container">
+                        <tr>
+                           <th colspan="1" rowspan="1" class="sortable">
+                              <span>Arrives on</span>
+                           </th>
+                           <th colspan="1" rowspan="1" class="sortable">
+                              <span>Flight</span>
+                           </th>
+                           <th colspan="1" rowspan="1" class="sortable">
+                              <span>Status</span>
+                           </th>
+                           <th colspan="1" rowspan="1" class="sortable">
+                              <span>Terminal</span>
+                           </th>
+                           <th colspan="1" rowspan="1" class="sortable">
+                              <span>Gate</span>
+                           </th>
+                           <th colspan="1" rowspan="1" class="sortable">
+                              <span>Arriving from</span>
+                           </th>
+                           <th colspan="1" rowspan="1" class="sortable">
+                              <span>Estimated Arrival</span>
+                           </th>
+                        </tr>
+                     </thead>
+                     <tbody class="pg-row-list">
+                        <ng-template ngFor let-flightarrival [ngForOf]="(infoshow | async)! | paginate: { itemsPerPage: 10, currentPage: p }" let-i="index">
+                           <tr class="pg-row" [ngStyle]="{'color':getDelayAndStatus(flightarrival)}">
+                              <td>{{flightarrival.arrival.scheduled| date }}</td>
+                              <td>{{flightarrival.flight.iata}}</td>
+                              <td>{{flightarrival.flight_status}}</td>
+                              <td>{{flightarrival.arrival.terminal}}</td>
+                              <td>{{flightarrival.arrival.gate}}</td>
+                              <td>{{flightarrival.arrival.scheduled | date }}</td>
+                              <td>{{flightarrival.arrival.estimated | date }}</td>
+                           </tr>
+                         </ng-template>
+                     </tbody>
+                     <tfoot>
+                     </tfoot>
+                  </table>
+                </ng-template>
              </div>
              <!-- <Pages> -->
              <div class="page_navigator">
