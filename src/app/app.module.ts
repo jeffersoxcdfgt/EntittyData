@@ -11,12 +11,6 @@ import { EntityDataModule, HttpUrlGenerator } from '@ngrx/data';
 import { PluralHttpUrlGenerator } from './shared/pluralgenerator';
 import { EffectsModule } from '@ngrx/effects';
 import { entityConfig } from './shared/entity/entity-metadata';
-import  * as userReducers from './user/store/reducers/user.reducer';
-import { UserEffects } from './user/store/effects/user.effect';
-import { UserService } from './user/store/services/user.service';
-import  * as bookReducers from './book/store/reducers/book.reducer';
-import { BookEffects } from './book/store/effects/book.effect';
-import { BookService } from './book/store/services/book.service';
 import  * as fligthsReducers from './flights/store/reducers/fligths.reducer';
 import { FligthskEffects } from './flights/store/effects/fligths.effect';
 import { FligthsService } from './flights/store/services/fligths.service';
@@ -27,8 +21,6 @@ import { AirportsService } from './airports/store/services/airports.service';
 import { TraceService } from './shared/utils/traceService';
 
 export const reducers: ActionReducerMap<any> = {
-  user:userReducers.reducer,
-  book:bookReducers.reducer,
   fligths:fligthsReducers.reducer,
   airports:airportsReducers.reducer
 }
@@ -43,14 +35,12 @@ export const reducers: ActionReducerMap<any> = {
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([UserEffects,BookEffects,FligthskEffects,AirportsEffects]),
+    EffectsModule.forRoot([FligthskEffects,AirportsEffects]),
     EntityDataModule.forRoot(entityConfig)
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator },
-    UserService,
-    BookService,
     FligthsService,
     AirportsService,
     TraceService,
