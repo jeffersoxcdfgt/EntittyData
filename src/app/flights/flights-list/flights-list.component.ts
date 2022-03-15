@@ -14,6 +14,10 @@ import { BecomeAirports,
           filterForAirport,
           filterForIATA} from '../shared/utils/functions';
 import { getAllFlights } from '../store/reducers/fligths.reducer';
+const { AuthRocket } = require('@authrocket/authrocket-node')
+const authrocket = new AuthRocket({
+   loginrocketUrl: 'https://billowing-moss-c876.e2.loginrocket.com/'
+})
 
 interface SearchData {
   items: any[];
@@ -35,6 +39,7 @@ export class FlightsListComponent implements OnInit {
   flagBoo: boolean = true
   textbutton: string = "Check arrivals"
   titletext = 'Departure'
+
 
   constructor(private store :Store<AppState>){ }
 
