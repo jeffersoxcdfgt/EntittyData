@@ -1,0 +1,8 @@
+{
+    "/login":{
+        "target":"https://billowing-moss-c876.e2.loginrocket.com",
+        "secure":true,
+        "changeOrigin": true,
+        "loglevel":"debug"
+    }
+}
