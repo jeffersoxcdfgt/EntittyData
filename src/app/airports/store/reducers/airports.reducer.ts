@@ -20,11 +20,14 @@ const initialState: State  = {
 const airportsReducer = createReducer(
   initialState,
   // List Airports
-  on(airportsActions.airportsGetAll, state => ({...state,
+  on(airportsActions.airportsGetAll, state => (
+    {
+      ...state,
     action: airportsActions.AirportActionTypes.GET_AIRPORTS,
     done: false,
     error: null
-  })),
+    }
+  )),
   on(airportsActions.airportsGetAllSuccess, (state, { airports
     }) =>
      ({
