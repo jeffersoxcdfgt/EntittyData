@@ -17,7 +17,7 @@ export class LoginService {
    * @returns gets the list of objects found
    */
   public logIn(data: Login): Observable<userLoginResponse>{
-    return this.http.post<Login>(`${this.URL}/login`, data.user).pipe(
+    return this.http.post<Login>(`/login`, data.user).pipe(
         tap(_ => console.log('LOGIN')),
         catchError(this.traceService.handleError<userLoginResponse>('logIn'))
     );
