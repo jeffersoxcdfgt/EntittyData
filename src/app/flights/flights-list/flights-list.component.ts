@@ -15,9 +15,7 @@ import { BecomeAirports,
           filterForIATA} from '../shared/utils/functions';
 import { getAllFlights } from '../store/reducers/fligths.reducer';
 const { AuthRocket } = require('@authrocket/authrocket-node')
-const authrocket = new AuthRocket({
-   loginrocketUrl: 'https://billowing-moss-c876.e2.loginrocket.com/'
-})
+
 
 interface SearchData {
   items: any[];
@@ -44,6 +42,12 @@ export class FlightsListComponent implements OnInit {
   constructor(private store :Store<AppState>){ }
 
   ngOnInit(): void {
+
+    /*const authrocket = new AuthRocket({
+      loginrocketUrl: 'https://billowing-moss-c876.e2.loginrocket.com/'
+    })*/
+
+
     this.infoshow = this.store.select(getAllFlights).pipe(cleanFligths,BecomeFligths,BecomeDataFligths)
     this.store.select(getAllAirports)
           .pipe(cleanAiports,
