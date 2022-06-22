@@ -72,7 +72,7 @@ export class FlightsListComponent implements OnInit {
 
   getDelay(flight: DataFlights): string {
     if(!!flight.departure.delay && Number(flight.departure.delay) >= 5){
-      return 'red';
+      return 'red';    
     }
     return ''
   }
